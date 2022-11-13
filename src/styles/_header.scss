@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    padding-top: $Small-Padding;
+    padding-left: $Page-Sides_Padding;
+    padding-right: $Page-Sides_Padding;
+    &__nav {
+        display: flex;
+        gap: 20px;
+        flex-grow: 0;
+        
+
+        & a {
+            color: $Theam-Color;
+            text-decoration: none;
+
+            &:hover {
+                border-bottom: 2px solid $Theam-Color;
+            }
+        }
+    }
+    &__logo-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+    &__cart-icon-container {
+        flex-grow: 0;
+    }
+}
+
