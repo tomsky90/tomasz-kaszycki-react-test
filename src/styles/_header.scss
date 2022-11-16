@@ -1,8 +1,6 @@
 .header{
     display: flex;
     padding-top: $Small-Padding;
-    padding-left: $Page-Sides_Padding;
-    padding-right: $Page-Sides_Padding;
     &__nav {
         display: flex;
         gap: 20px;

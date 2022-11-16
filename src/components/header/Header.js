@@ -10,9 +10,9 @@ class Header extends Component {
         return(
             <header className="header">
             <nav className="header__nav">
-                <Link to='./women'>ALL</Link>
-                <Link to='./men'>CLOTHES</Link>
-                <Link to='./kids'>TECH</Link>
+                <Link to='./category/all'>ALL</Link>
+                <Link to='./category/clothes'>CLOTHES</Link>
+                <Link to='./category/tech'>TECH</Link>{}
             </nav>
             <div className="header__logo-container">
                 <img src={logoIcon} alt="logo"/>
