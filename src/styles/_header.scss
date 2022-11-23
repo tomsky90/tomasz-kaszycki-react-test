@@ -23,6 +23,52 @@
     }
     &__cart-icon-container {
         flex-grow: 0;
+        margin-left: 10px;
     }
 }
 
+.header__cart-icon-currency-switcher-wrapper {
+    position: relative;
+    font-weight: 500;
+    cursor: pointer;
+    & span {
+        margin-right: 5px;
+    }
+}
+
+.currency-switcher__select-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.currency-switcher__options-wrapper {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.5);
+        -webkit-box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.5);
+        -moz-box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.5);
+    & .option {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+}
+
+.currency-switcher__options-wrapper.active {
+    display: block;
+}
+
+.currenccy-switcher__arrow {
+    padding-bottom: 3px;
+}
+
+.currenccy-switcher__arrow.active {
+    rotate: 180deg;
+    padding-top: 3px;
+}
+
+.currency-switcher__options-wrapper .option:hover {
+    background-color: #eee;
+}

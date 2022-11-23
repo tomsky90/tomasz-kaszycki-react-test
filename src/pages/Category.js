@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { fetchProducts } from "../actions/productActions";
 import { connect } from "react-redux";
-import ProductDetailComponent from '../components/ProductDetailComponent';
+import ProductDetailComponent from '../components/productDetail/ProductDetailComponent';
 
 
 class CategoryPage extends Component {
@@ -22,8 +22,6 @@ class CategoryPage extends Component {
 
 
     render() {
-
-        // const { products } = this.props.products.items?.category?.products
         return(
            
             <section className='category-page-wrapper'>

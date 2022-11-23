@@ -22,9 +22,7 @@ class App extends Component {
       <BrowserRouter>
       <div className='app-wrapper'>
         <Header/>
-
         <Routes>
-        
           <Route path='/category/:name' element={<Wrapper/>}/>
           <Route path='/' element={<Navigate replace to='category/all'/>}/>
         </Routes>
