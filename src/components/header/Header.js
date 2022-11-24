@@ -51,7 +51,7 @@ class Header extends Component {
                     </div> 
                     <div className={this.state.isOptionsActive ? 'currency-switcher__options-wrapper active' : 'currency-switcher__options-wrapper'}>
                         {this.props.currencies.currencies.currencies !== undefined ? this.props.currencies.currencies.currencies.map((currency) => (
-                            <div onClick={() => {this.props.setSelectedCurrency(currency)}} key={currency.label} className="option"><span>{currency.symbol}</span><span>{currency.label}</span></div>
+                            <div onClick={() => {this.props.setSelectedCurrency(currency); this.toggleOptionsActive()}} key={currency.label} className="option"><span>{currency.symbol}</span><span>{currency.label}</span></div>
                         )) : null}
                     </div>
                 </div>

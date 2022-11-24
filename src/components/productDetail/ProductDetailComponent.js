@@ -41,7 +41,7 @@ class ProductDetailComponent extends Component {
                 
                 <div className="product-detail-component__text-container">
                     <p>{this.props.item.name}</p>
-                    <p className="product-detail-component__price-container">{this.props.item?.prices?.[0]?.currency?.symbol}{this.state.price}</p>
+                    <p className="product-detail-component__price-container">{this.props.currencies.selectedCurrency.symbol} {this.state.price}</p>
 
                 </div>
                 
