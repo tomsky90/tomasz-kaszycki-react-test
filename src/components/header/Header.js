@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { getCurrencies } from "../../actions/currencyAction";
 import { connect } from "react-redux";
 import { setSelectedCurrency } from "../../actions/currencyAction";
@@ -32,9 +32,9 @@ class Header extends Component {
         return(
             <header className="header">
             <nav className="header__nav">
-                <Link to='./category/all'>ALL</Link>
-                <Link to='./category/clothes'>CLOTHES</Link>
-                <Link to='./category/tech'>TECH</Link>{}
+                <NavLink to='./category/all'>ALL</NavLink>
+                <NavLink to='./category/clothes'>CLOTHES</NavLink>
+                <NavLink to='./category/tech'>TECH</NavLink>{}
             </nav>
             <div className="header__logo-container">
                 <img src={logoIcon} alt="logo"/>
@@ -42,8 +42,9 @@ class Header extends Component {
             <div className="header__cart-icon-currency-switcher-wrapper"> 
                 <div className="header__currency-switcher-container" >
                     <div className="currency-switcher__select-bar">
-                        <div className="currency-switcher__icon" onClick={this.toggleOptionsActive}>
-                            <span>$</span><img className={this.state.isOptionsActive ? 'currenccy-switcher__arrow active' : 'currenccy-switcher__arrow'} src={currencyArrow} />
+                        <div className="currency-switcher__icon" onClick={(e) => {this.toggleOptionsActive()}}>
+                            <span>{this.props.currencies?.selectedCurrency?.symbol }</span>
+                            <img className={this.state.isOptionsActive ? 'currenccy-switcher__arrow active' : 'currenccy-switcher__arrow'} src={currencyArrow} />
                         </div>
                         <div className="header__cart-icon-container" >
                             <img src={cartIcon} alt="cart icon" />

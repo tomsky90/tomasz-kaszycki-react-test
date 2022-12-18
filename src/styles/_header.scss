@@ -8,10 +8,14 @@
         
 
         & a {
-            color: $Theam-Color;
+            color: #000;
             text-decoration: none;
 
             &:hover {
+                border-bottom: 2px solid $Theam-Color;
+            }
+            &.active{
+                color: $Theam-Color;
                 border-bottom: 2px solid $Theam-Color;
             }
         }

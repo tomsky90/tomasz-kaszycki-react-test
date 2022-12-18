@@ -4,6 +4,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 //components
 import Header from './components/header/Header';
+import ProductPage from './pages/ProductPage';
 //pages
 import CategoryPage from './pages/Category';
 //style
@@ -17,6 +18,11 @@ class App extends Component {
       const params = useParams();
       return <CategoryPage {...{...props, match: {params}}}/>
     }
+
+    const ProductPageWrapper = (props) => {
+      const params = useParams();
+      return <ProductPage {...{...props, match: {params}}}/>
+    }
     return(
       <Provider store={store}>
       <BrowserRouter>
@@ -25,6 +31,7 @@ class App extends Component {
         <Routes>
           <Route path='/category/:name' element={<Wrapper/>}/>
           <Route path='/' element={<Navigate replace to='category/all'/>}/>
+          <Route path=':category/:id' element={<ProductPageWrapper/>}/>
         </Routes>
       </div>
       </BrowserRouter>

@@ -30,7 +30,7 @@ class CategoryPage extends Component {
                 </div>
                 
                <div className='category-page-wrapper__items-wrapper'>
-               {this.props.products.items?.category?.products.map(item => <ProductDetailComponent item={item} key={item.id}/>)}
+               {this.props.products && this.props.products.map(item => <ProductDetailComponent item={item} key={item.id}/>)}
            
                </div>
             </section>
@@ -39,7 +39,7 @@ class CategoryPage extends Component {
 }
 
 export default connect(
-    (state) => ({ products: state.products}),
+    (state) => ({ products: state.products.items?.category?.products}),
     {
       fetchProducts,
     }
