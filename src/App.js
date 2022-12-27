@@ -27,6 +27,8 @@ class App extends Component {
       <Provider store={store}>
       <BrowserRouter>
       <div className='app-wrapper'>
+        <div className='message'>
+        </div>
         <Header/>
         <Routes>
           <Route path='/category/:name' element={<Wrapper/>}/>

@@ -1,6 +1,6 @@
 .product-page__page-wrapper {
     display: flex;
-    padding-top: 4rem;
+    padding-top: 6rem;
     padding-bottom: 4rem;
 }
 
@@ -8,6 +8,7 @@
     display: flex;
     column-gap: 2rem;
     margin-right: 100px;
+    width: 55%;
     &__thumbnails {
         display: flex;
         flex-direction: column;
@@ -31,7 +32,6 @@
 }
 
 .product-page__description-wrapper {
-    width: 50%;
     &__title {
         line-height: 27px;
         font-size: 30px;
@@ -112,10 +112,15 @@
             background-color: lighten($Theam-Color, 10%)
         }
     }
+    &__out-of-stock {
+        color: #9e1a1a;
+        margin-top: 20px;
+    }
     &__product-description {
         margin-top: 30px;
         font-family: 'Roboto';
         font-weight: 400;
+        max-width: 40%;
         & li {
             margin-bottom: 10px;
         }

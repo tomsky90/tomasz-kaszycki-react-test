@@ -37,7 +37,7 @@ class ProductPage extends Component {
 
     componentDidUpdate(prevProps) {
        
-        if (this.props.products?.item?.product?.attributes != undefined && this.props.products?.item?.product?.attributes !== prevProps.products?.item?.product?.attributes) {
+        if (this.props.products?.item?.product?.attributes !== undefined && this.props.products?.item?.product?.attributes !== prevProps.products?.item?.product?.attributes) {
             if(this.props.products?.item?.product?.attributes !== prevProps.products?.item?.product?.attributes) {
                 this.setDefaultAttribute(this.props.products?.item?.product?.attributes)
             }
@@ -53,7 +53,7 @@ class ProductPage extends Component {
         elementId = element.id
         refacoredAttributes[elementId] = {
             type: element.type,
-            selectedValue: element.items[0].value,
+            selectedValue: null,
             element: element.id
         }
     
@@ -151,7 +151,8 @@ class ProductPage extends Component {
                         </p>
                     </div>
 
-                    <button className="product-page__description-wrapper__add-to-cart-btn">ADD TO CART</button>
+                    {this.props?.products?.item?.product?.inStock && <button className="product-page__description-wrapper__add-to-cart-btn">ADD TO CART</button>}
+                    {!this.props?.products?.item?.product?.inStock && <h4 className="product-page__description-wrapper__out-of-stock">We are sorry! Item currently out of Stock.</h4>}
 
                     <div className="product-page__description-wrapper__product-description">
                         {parse(`${this.props?.products?.item?.product?.description}`)}

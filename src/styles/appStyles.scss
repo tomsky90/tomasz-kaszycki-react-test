@@ -4,6 +4,7 @@
 @import '_categoryPage.scss';
 @import '_productDetailComponent.scss';
 @import '_productPage.scss';
+@import '_bagPage.scss';
 
 *{
     margin: 0;
@@ -18,4 +19,22 @@ body{
 .app-wrapper {
     padding-left: $Page-Sides_Padding;
     padding-right: $Page-Sides_Padding;
+}
+
+.message {
+position: fixed;
+left: 48%;
+transform: translateY(-200px);
+top: 100px;
+border: 1px solid $Theam-Color;
+padding: 10px 20px ;
+border-radius: 8px;
+color: $Theam-Color;
+transition: .5s ease-in-out;
+z-index: 5;
+background-color: #fff;
+}
+
+.message.active {
+    transform: translateY(0);
 }

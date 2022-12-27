@@ -1,6 +1,11 @@
 .header{
+    position: sticky;
+    top: 0;
+    left: 0;
     display: flex;
     padding-top: $Small-Padding;
+    z-index: 1;
+    background-color: #fff;
     &__nav {
         display: flex;
         gap: 20px;
@@ -26,8 +31,25 @@
         justify-content: center;
     }
     &__cart-icon-container {
+        position: relative;
         flex-grow: 0;
         margin-left: 10px;
+        &__items-in-cart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            width: 15px;
+            height: 15px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Roboto';
+            background-color: #000;
+            border-radius: 50%;
+            padding: 5px;
+        }
     }
 }
 

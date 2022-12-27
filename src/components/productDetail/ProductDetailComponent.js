@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 //icons
 import cartIcon from '../../icons/Empty Cart white.png';
+//redux
+import { addToCart } from "../../actions/cartAction";
+//utilitys
+import { showMessage } from "../../utility";
+
 
 class ProductDetailComponent extends Component {
     constructor(props) {
@@ -31,16 +36,42 @@ class ProductDetailComponent extends Component {
             price: price[0].amount
         })
     }
+
+    //check if product has attributes if so select default and push to cart
+    validateProduct = (item) => {
+        const itemCopy = {...item}
+        if(itemCopy.attributes.length === 0) {
+            this.props.addToCart(itemCopy)
+            showMessage(`${item.name} added to cart!`)
+        } else {
+            const refacoredAttributes = [];
+            const attributes =  itemCopy.attributes;
+            attributes.forEach(element => {
+                element =  {
+                    type: element.type,
+                    selectedValue: element.items[0].value,
+                    element: element.id,
+                    items: element.items
+                };
+                refacoredAttributes.push(element)
+            
+               });
+               itemCopy.attributes = refacoredAttributes
+               this.props.addToCart(itemCopy)
+               showMessage(`${item.name} added to cart!`)
+        }
+        
+    }
     render() {
         return (
-            <div className="product-detail-component" onClick={() => {this.props.setSelectedProduct && this.props.setSelectedProduct(this.props.item)}}>
+            <div className="product-detail-component">
                 <Link to={`/${this.props.products?.items?.category?.name}/${this.props.item.id}`}>
                 <div className="product-detail-component__img-wrapper">
                     {!this.props.item.inStock && <div className="product-detail-component__out-of-stock-img-cover" style={{color: '#8D8F9A'}}><p>OUT OF STOCK</p></div>}
+                    
                     <img src={this.props.item?.gallery[0]} alt=''/>
-                    { this.props.item.inStock &&<div className="product-detail-component__img-wrapper__cart-icon">
-                        <img src={cartIcon} alt=''/>
-                    </div>} 
+                    
+                   
                 </div>
                 
                 <div className= {this.props.item.inStock ? 'product-detail-component__text-container' : 'product-detail-component__text-container out-of-stock'}>
@@ -51,6 +82,9 @@ class ProductDetailComponent extends Component {
 
                 </div>
                 </Link>
+                { this.props.item.inStock &&<div onClick={() => {this.validateProduct(this.props.item)}} className="product-detail-component__img-wrapper__cart-icon">
+                        <img src={cartIcon} alt=''/>
+                    </div>} 
                 
             </div>
         )
@@ -58,8 +92,8 @@ class ProductDetailComponent extends Component {
 }
 
 export default connect(
-    (state) => ({ currencies: state.currencies, products: state.products,}),
+    (state) => ({ currencies: state.currencies, products: state.products, cart: state}),
     {
-        
+        addToCart
     }
   )(ProductDetailComponent);
