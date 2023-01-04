@@ -22,7 +22,6 @@ export const showMessage = (message) => {
   const element = document.querySelector('.message')
   element.textContent = message;
   element.classList.add('active')
-  console.log(element)
 
   setTimeout(() => {
     element.classList.remove('active')

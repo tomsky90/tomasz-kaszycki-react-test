@@ -13,7 +13,7 @@ const query = (name) => {
               .addField(
                 new Field('attributes', true)
                   .addFieldList(['id', 'type', 'name'])
-                  .addField(new Field('items', true).addFieldList(['id', 'value', 'displayValue']))
+                  .addField(new Field('items', true).addFieldList(['displayValue', 'value', 'id']))
               )
               .addField(new Field('gallery', true))
               .addField(

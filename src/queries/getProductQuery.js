@@ -8,6 +8,7 @@ const getProductQuery = (id) => {
         .addField('description')
         .addField( new Field ('gallery', true))
         .addField('category')
+        .addField('id')
         .addField( new Field ('attributes', true)
             .addFieldList(['name', 'id', 'type'])
                 .addField( new Field('items', true)
