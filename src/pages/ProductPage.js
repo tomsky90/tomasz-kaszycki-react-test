@@ -4,6 +4,8 @@ import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/cartAction";
 import { getTitle, getSubTitle,showMessage } from "../utility";
+//componnents
+import Spinner from "../components/spinner/Spinner";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -133,6 +135,11 @@ class ProductPage extends Component {
   }
 
   render() {
+    if(!this.props?.products?.item?.product) {
+      return(
+        <Spinner/>
+      )
+    }
     return (
       <div className="product-page__page-wrapper">
         <div className="product-page gallery-wrapper">
