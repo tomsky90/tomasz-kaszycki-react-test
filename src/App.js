@@ -7,8 +7,9 @@ import Header from './components/header/Header';
 import ProductPage from './pages/ProductPage';
 //pages
 import CategoryPage from './pages/Category';
+import CartPage from './pages/CartPage';
 //style
-import './styles/appStyles.scss'
+import './styles/appStyles.scss';
 
 
 class App extends Component {
@@ -31,9 +32,10 @@ class App extends Component {
         </div>
         <Header/>
         <Routes>
-          <Route path='/category/:name' element={<Wrapper/>}/>
-          <Route path='/' element={<Navigate replace to='category/all'/>}/>
+          <Route path='/:name' element={<Wrapper/>}/>
+          <Route path='/' element={<Navigate replace to='/all'/>}/>
           <Route path=':category/:id' element={<ProductPageWrapper/>}/>
+          <Route path='cart' element={<CartPage/>}/>
         </Routes>
       </div>
       </BrowserRouter>

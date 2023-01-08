@@ -83,10 +83,8 @@ class ProductPage extends Component {
   };
 
   selectAttribute = (id, value) => {
-    const selectAttributes = { ...this.state.defaultAttributes };
+    const selectAttributes = {...this.state.defaultAttributes };
     selectAttributes[id].selectedValue = value;
-    
-
     this.setState({
       defaultAttributes: selectAttributes,
     });
@@ -125,7 +123,6 @@ class ProductPage extends Component {
                         items: element.items
                     };
                     refacoredAttributes.push(element)
-                    console.log(element)
                    });
                    itemCopy.attributes = refacoredAttributes
                    this.props.addToCart(itemCopy)

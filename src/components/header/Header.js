@@ -67,9 +67,9 @@ class Header extends Component {
     return (
       <header className="header">
         <nav className="header__nav">
-          <NavLink to="./category/all">ALL</NavLink>
-          <NavLink to="./category/clothes">CLOTHES</NavLink>
-          <NavLink to="./category/tech">TECH</NavLink>
+          <NavLink to="./all">ALL</NavLink>
+          <NavLink to="./clothes">CLOTHES</NavLink>
+          <NavLink to="./tech">TECH</NavLink>
         </nav>
         <div className="header__logo-container">
           <img src={logoIcon} alt="logo" />

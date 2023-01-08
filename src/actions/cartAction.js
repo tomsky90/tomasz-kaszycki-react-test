@@ -1,7 +1,6 @@
 export const addToCart = (product) => (dispatch, getState) => {
     const cartItems = getState().cart.cartItems.slice();
     let exists = cartItems.find(element => (JSON.stringify(element.attributes) === JSON.stringify(product.attributes) && element.id === product.id))
-    console.log(exists)
     if(exists) {
       exists.qty++
     }
@@ -13,6 +12,7 @@ export const addToCart = (product) => (dispatch, getState) => {
         type: 'ADD_TO_CART',
         payload: { cartItems },
       });
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
 export const upCartItemByOne = (product) => (dispatch, getState) => {
@@ -25,6 +25,7 @@ export const upCartItemByOne = (product) => (dispatch, getState) => {
       type: 'UP_CART_ITEM_BY_ONE',
       payload: { cartItems },
     });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
 export const minusCartItemByOne = (product) => (dispatch, getState) => {
@@ -63,4 +64,5 @@ export const minusCartItemByOne = (product) => (dispatch, getState) => {
       type: 'MINUS_CART_ITEM_BY_ONE',
       payload: { cartItems },
     });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }

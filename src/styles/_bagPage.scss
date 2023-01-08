@@ -55,19 +55,23 @@
             bottom: 10px;
             display: flex;
             column-gap: 10px;
-            & button {
-                width: 45%;
-                height: 43px;
-                cursor: pointer;
-            }
             & .view-btn {
                 background-color: #fff;
                 outline: none;
                 border: 1px solid #000;
+                width: 100%;
+                height: inherit;
+                cursor: pointer;
+
                 &:hover {
                     color: #fff;
                     background-color: #000;
                 }
+            }
+            & .button {
+                width: 45%;
+                height: 43px;
+                cursor: pointer;
             }
             & .checkout-btn {
                 background-color: $Theam-Color;
@@ -83,7 +87,7 @@
 }
 
 
-.attribute {
+.bag-page__attribute {
     & p {
         margin-bottom: 5px;
         margin-top: 10px;

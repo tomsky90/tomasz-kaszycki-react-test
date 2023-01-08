@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
 import { getTitle, getSubTitle, getPrice} from "../utility";
 
@@ -62,7 +63,7 @@ class BagPage extends Component {
         <div ref={this.bagPageRef} className="bag-page__bag-wrapper">
           <p className="bag-page__heading">
             My Bag. 
-            <span>{console.log(cartItems)}
+            <span>
               {this.totalItemsInCart()}
               {this.totalItemsInCart() < 1 ? 'No items in the cart': this.totalItemsInCart() === 1 ? ' item' : ' items'}
             </span>
@@ -79,13 +80,13 @@ class BagPage extends Component {
                 {item.attributes.map((attr) => (
                   <div key={attr.element} className="bag-page__attribute">
                     <p>{attr.element}</p>
-                    <div className="attribute__description-wrapper__attributes-wrapper">
+                    <div className="bag-page__attribute__description-wrapper__attributes-wrapper">
                       {attr.type === "text" &&
                         attr.items &&
                         attr.items.map((item) => (
                           <div
                             key={item.id}
-                            className={`attribute__description-wrapper__attribute--text attribute${
+                            className={`bag-page__attribute__description-wrapper__attribute--text attribute${
                               attr.selectedValue === item.value ? " active" : ""
                             }`}
                           >
@@ -98,7 +99,7 @@ class BagPage extends Component {
                           <div
                             key={item.id}
                             style={{ backgroundColor: `${item.value}` }}
-                            className={`attribute__description-wrapper__attribute--swatch attribute${
+                            className={`bag-page__attribute__description-wrapper__attribute--swatch attribute${
                               attr.selectedValue === item.value ? " active" : ""
                             }`}
                           >
@@ -125,11 +126,13 @@ class BagPage extends Component {
               <p>Total</p>
               <p><span>{selectedCurrency.symbol}</span>{" "}{this.calculateTotalPrice()}</p>
             </div>
-            <div className="bag-page__bag-wrapper__summary__btns">
+            <div className="bag-page__bag-wrapper__summary__btns ">
+              <Link className="button" onClick={() => {this.props.toggleBagPageActive()}} to='cart'>
                 <button className="view-btn">
                     VIEW BAG
                 </button>
-                <button className="checkout-btn">
+              </Link>
+                <button className="checkout-btn button">
                     CHECKOUT
                 </button>
             </div>

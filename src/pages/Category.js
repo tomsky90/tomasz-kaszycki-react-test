@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+//redux
 import { fetchProducts } from "../actions/productActions";
 import { connect } from "react-redux";
+//components
 import ProductDetailComponent from "../components/productDetail/ProductDetailComponent";
+import Spinner from "../components/spinner/Spinner";
 
 class CategoryPage extends Component {
   constructor(props) {
@@ -19,6 +22,11 @@ class CategoryPage extends Component {
   }
 
   render() {
+    if(!this.props.products) {
+      return (
+        <Spinner/>
+      )
+    }
     return (
       <section className="category-page-wrapper">
         <div className="category-page-wrapper__title-wrapper">
