@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
-import { getTitle, getSubTitle, getPrice} from "../utility";
+import { getTitle, getSubTitle, getPrice } from "../utility";
 
 class BagPage extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class BagPage extends Component {
     this.bagPageRef = React.createRef();
     this.closeBagePage = this.closeBagePage.bind(this);
   }
-
 
   componentDidMount() {
     //close bag page on click outside
@@ -44,15 +43,16 @@ class BagPage extends Component {
   calculateTotalPrice = () => {
     let price = null;
     const tax = 21;
-    this.props.cart.cart.cartItems.forEach(item => {
-      price += getPrice(item.prices, this.props.currencies.selectedCurrency.symbol) * item.qty;
-    })
-    const taxValue = tax / 100 * price;
-    const totalPrice = price + taxValue
-    
-    
-    return totalPrice.toFixed(2)
-  }
+    this.props.cart.cart.cartItems.forEach((item) => {
+      price +=
+        getPrice(item.prices, this.props.currencies.selectedCurrency.symbol) *
+        item.qty;
+    });
+    const taxValue = (tax / 100) * price;
+    const totalPrice = price + taxValue;
+
+    return totalPrice.toFixed(2);
+  };
 
   render() {
     const { cartItems } = this.props.cart.cart;
@@ -62,13 +62,17 @@ class BagPage extends Component {
         <div className="bag-page__bgc"></div>
         <div ref={this.bagPageRef} className="bag-page__bag-wrapper">
           <p className="bag-page__heading">
-            My Bag. 
+            My Bag.
             <span>
               {this.totalItemsInCart()}
-              {this.totalItemsInCart() < 1 ? 'No items in the cart': this.totalItemsInCart() === 1 ? ' item' : ' items'}
+              {this.totalItemsInCart() < 1
+                ? "No items in the cart"
+                : this.totalItemsInCart() === 1
+                ? " item"
+                : " items"}
             </span>
           </p>
-          {cartItems.map((item,index) => (
+          {cartItems.map((item, index) => (
             <div className="cart-item" key={`${item.id}${index}`}>
               <div className="cart-item__description">
                 <p>{getTitle(item.name)}</p>
@@ -102,8 +106,7 @@ class BagPage extends Component {
                             className={`bag-page__attribute__description-wrapper__attribute--swatch attribute${
                               attr.selectedValue === item.value ? " active" : ""
                             }`}
-                          >
-                          </div>
+                          ></div>
                         ))}
                     </div>
                   </div>
@@ -111,12 +114,28 @@ class BagPage extends Component {
               </div>
               <div className="item__gallery">
                 <div className="item__qty-btns">
-                    <button className="item__qty-btns__add" onClick={() => {this.props.upCartItemByOne(item)}}>+</button>
-                    {!this.props.cart.cart.cartItems[index].qty ? 0 : this.props.cart.cart.cartItems[index].qty}
-                    <button className="item__qty-btns__take-away" onClick={() =>{this.props.minusCartItemByOne(item)}}>-</button>
+                  <button
+                    className="item__qty-btns__add"
+                    onClick={() => {
+                      this.props.upCartItemByOne(item);
+                    }}
+                  >
+                    +
+                  </button>
+                  {!this.props.cart.cart.cartItems[index].qty
+                    ? 0
+                    : this.props.cart.cart.cartItems[index].qty}
+                  <button
+                    className="item__qty-btns__take-away"
+                    onClick={() => {
+                      this.props.minusCartItemByOne(item);
+                    }}
+                  >
+                    -
+                  </button>
                 </div>
                 <div className="item__img-wrapper">
-                    <img src={item.gallery[0]} alt={`${item.name}`}/>
+                  <img src={item.gallery[0]} alt={`${item.name}`} />
                 </div>
               </div>
             </div>
@@ -124,17 +143,22 @@ class BagPage extends Component {
           <div className="bag-page__bag-wrapper__summary">
             <div className="bag-page__bag-wrapper__summary__price">
               <p>Total</p>
-              <p><span>{selectedCurrency.symbol}</span>{" "}{this.calculateTotalPrice()}</p>
+              <p>
+                <span>{selectedCurrency.symbol}</span>{" "}
+                {this.calculateTotalPrice()}
+              </p>
             </div>
             <div className="bag-page__bag-wrapper__summary__btns ">
-              <Link className="button" onClick={() => {this.props.toggleBagPageActive()}} to='cart'>
-                <button className="view-btn">
-                    VIEW BAG
-                </button>
+              <Link
+                className="button"
+                onClick={() => {
+                  this.props.toggleBagPageActive();
+                }}
+                to="cart"
+              >
+                <button className="view-btn">VIEW BAG</button>
               </Link>
-                <button className="checkout-btn button">
-                    CHECKOUT
-                </button>
+              <button className="checkout-btn button">CHECKOUT</button>
             </div>
           </div>
         </div>
@@ -147,6 +171,6 @@ export default connect(
   (state) => ({ cart: state, currencies: state.currencies }),
   {
     upCartItemByOne,
-    minusCartItemByOne
+    minusCartItemByOne,
   }
 )(BagPage);
