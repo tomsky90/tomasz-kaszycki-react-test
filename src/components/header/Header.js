@@ -71,8 +71,12 @@ class Header extends Component {
           <NavLink to="./clothes">CLOTHES</NavLink>
           <NavLink to="./tech">TECH</NavLink>
         </nav>
+        
         <div className="header__logo-container">
-          <img src={logoIcon} alt="logo" />
+         <NavLink to="./all">
+           <img src={logoIcon} alt="logo" />
+          </NavLink>
+          
         </div>
         <div className="header__cart-icon-currency-switcher-wrapper">
           <div className="header__currency-switcher-container">
