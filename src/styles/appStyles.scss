@@ -21,13 +21,16 @@ body{
 .app-wrapper {
     padding-left: $Page-Sides_Padding;
     padding-right: $Page-Sides_Padding;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .message {
 position: fixed;
 left: 48%;
 transform: translateY(-200px);
-top: 100px;
+top: 105px;
 border: 1px solid $Theam-Color;
 padding: 10px 20px ;
 border-radius: 8px;

@@ -34,21 +34,22 @@
         position: relative;
         flex-grow: 0;
         margin-left: 10px;
+        padding: 5px;
         &__items-in-cart {
             display: flex;
             justify-content: center;
             align-items: center;
             position: absolute;
             top: -5px;
-            right: -8px;
+            right: -7px;
             width: 15px;
             height: 15px;
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             font-family: 'Roboto';
             background-color: #000;
             border-radius: 50%;
-            padding: 5px;
+            padding: 10px;
         }
     }
 }

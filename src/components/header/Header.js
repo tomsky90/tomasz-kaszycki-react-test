@@ -71,12 +71,11 @@ class Header extends Component {
           <NavLink to="./clothes">CLOTHES</NavLink>
           <NavLink to="./tech">TECH</NavLink>
         </nav>
-        
+
         <div className="header__logo-container">
-         <NavLink to="./all">
-           <img src={logoIcon} alt="logo" />
+          <NavLink to="./all">
+            <img src={logoIcon} alt="logo" />
           </NavLink>
-          
         </div>
         <div className="header__cart-icon-currency-switcher-wrapper">
           <div className="header__currency-switcher-container">
@@ -112,6 +111,13 @@ class Header extends Component {
                   </div>
                 )}
                 <img src={cartIcon} alt="cart icon" />
+                {this.state.isBagPageActive && (
+                  <BagPage
+                    cartBtnRef={this.cartBtnRef}
+                    toggleBagPageActive={this.toggleBagPageActive}
+                    isBagPageActive={this.state.isBagPageActive}
+                  />
+        )}
               </div>
             </div>
             <div
@@ -142,13 +148,7 @@ class Header extends Component {
           </div>
         </div>
 
-        {this.state.isBagPageActive && (
-          <BagPage
-            cartBtnRef={this.cartBtnRef}
-            toggleBagPageActive={this.toggleBagPageActive}
-            isBagPageActive={this.state.isBagPageActive}
-          />
-        )}
+       
       </header>
     );
   }
