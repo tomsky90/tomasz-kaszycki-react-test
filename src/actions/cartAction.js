@@ -31,24 +31,6 @@ export const upCartItemByOne = (product) => (dispatch, getState) => {
 export const minusCartItemByOne = (product) => (dispatch, getState) => {
   let cartItems = getState().cart.cartItems.slice();
 
-
-//   let item = null
-
-//   for(let i = 0; i < cartItems.length; i++) {
-//     if(cartItems[i].id === product.id) {
-//       for(let j = 0; j < cartItems[i].attributes.length; j++) {
-//         if(cartItems[i].attributes[j].selectedValue === product.attributes[j].selectedValue) {
-//           item = cartItems[i]
-//         }
-//       }
-      
-//     }
-// }
-//   if(item) {
-//     item.qty--
-//   }
-
-
   
   let exists = cartItems.find(element => (JSON.stringify(element.attributes) === JSON.stringify(product.attributes) && element.id === product.id))
     if(exists) {

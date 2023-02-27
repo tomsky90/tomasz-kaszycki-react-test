@@ -43,17 +43,23 @@ class Header extends Component {
     }
   }
 
-  toggleOptionsActive = () => {
+  toggleOptionsActive = (e) => {
     this.setState({
       isOptionsActive: !this.state.isOptionsActive,
     });
   };
 
   toggleBagPageActive = () => {
-    this.setState({
-      isBagPageActive: !this.state.isBagPageActive,
-    });
+  this.setState({
+    isBagPageActive: !this.state.isBagPageActive
+  })
   };
+
+  closeBagPage = (e) => {
+    this.setState({
+      isBagPageActive: false,
+    });
+  }
 
   totalItemsInCart = () => {
     let total = null;
@@ -99,10 +105,7 @@ class Header extends Component {
                 />
               </div>
               <div
-                ref={this.cartBtnRef}
-                onClick={() => {
-                  this.toggleBagPageActive();
-                }}
+               
                 className="header__cart-icon-container"
               >
                 {this.props.cart.cartItems.length > 0 && (
@@ -110,11 +113,17 @@ class Header extends Component {
                     {this.totalItemsInCart()}
                   </div>
                 )}
-                <img src={cartIcon} alt="cart icon" />
+                <img 
+                  onClick={() => {
+                    this.toggleBagPageActive();
+                  }}
+                  ref={this.cartBtnRef}
+                  src={cartIcon} alt="cart icon" 
+                />
                 {this.state.isBagPageActive && (
                   <BagPage
                     cartBtnRef={this.cartBtnRef}
-                    toggleBagPageActive={this.toggleBagPageActive}
+                    hideBagePage={this.closeBagPage}
                     isBagPageActive={this.state.isBagPageActive}
                   />
         )}

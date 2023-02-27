@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
 import { getTitle, getSubTitle, getPrice } from "../utility";
 
-class BagPage extends Component {
+class BagPage extends PureComponent {
   constructor(props) {
     super(props);
     this.bagPageRef = React.createRef();
@@ -13,12 +13,12 @@ class BagPage extends Component {
 
   componentDidMount() {
     //close bag page on click outside
-    document.addEventListener("mousedown", this.closeBagePage);
+    document.addEventListener("click", this.closeBagePage);
   }
 
   componentWillUnmount() {
     //close bag page on click outside
-    document.removeEventListener("mousedown", this.closeBagePage);
+    document.removeEventListener("click", this.closeBagePage);
   }
 
   //close bag page on click outside
@@ -28,7 +28,7 @@ class BagPage extends Component {
       !this.bagPageRef.current.contains(event.target) &&
       !this.props.cartBtnRef.current.contains(event.target)
     ) {
-      this.props.toggleBagPageActive();
+      this.props.hideBagePage();
     }
   }
 
