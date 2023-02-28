@@ -11,32 +11,31 @@ class Slider extends PureComponent {
     };
   }
 
-  setPrevGalleryImg( item) {
-    if( this.state.index === 0) {
+  setPrevGalleryImg(item) {
+    if (this.state.index === 0) {
       this.setState({
         index: item.gallery.length - 1,
-        sliderImg: this.props.item.gallery[this.state.index]
-      })
+        sliderImg: this.props.item.gallery[this.state.index],
+      });
     } else {
-       this.setState({
+      this.setState({
         index: this.state.index - 1,
-        sliderImg: this.props.item.gallery[this.state.index]
-      })
+        sliderImg: this.props.item.gallery[this.state.index],
+      });
     }
   }
 
   setNextGalleryImg(item) {
-    
-    if( item.gallery.length -1 <= this.state.index) {
+    if (item.gallery.length - 1 <= this.state.index) {
       this.setState({
         index: 0,
-        sliderImg: this.props.item.gallery[this.state.index]
-      })
+        sliderImg: this.props.item.gallery[this.state.index],
+      });
     } else {
       this.setState({
         index: this.state.index + 1,
-        sliderImg: this.props.item.gallery[this.state.index]
-      })
+        sliderImg: this.props.item.gallery[this.state.index],
+      });
     }
   }
   render() {

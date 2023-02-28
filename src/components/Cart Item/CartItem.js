@@ -2,17 +2,23 @@ import React, { PureComponent } from "react";
 //helpers
 import { getTitle, getSubTitle, getPrice } from "../../utility";
 //redux
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 //actions
 import { upCartItemByOne, minusCartItemByOne } from "../../actions/cartAction";
 //components
-import Slider from '../Cart slider/CartSlider';
+import Slider from "../Cart slider/CartSlider";
 import Attributes from "../attributes/Attributes";
 
 class CartItem extends PureComponent {
-
   render() {
-    const { item, index, cartItems, selectedCurrency, upCartItemByOne, minusCartItemByOne } = this.props;
+    const {
+      item,
+      index,
+      cartItems,
+      selectedCurrency,
+      upCartItemByOne,
+      minusCartItemByOne,
+    } = this.props;
     return (
       <>
         <div className="cart-page__cart-item">
@@ -28,14 +34,14 @@ class CartItem extends PureComponent {
               {getPrice(item.prices, selectedCurrency?.symbol)}
             </p>
             {item.attributes.map((attr) => (
-              <Attributes attr={attr}/>
+              <Attributes attr={attr} />
             ))}
           </div>
-          <Slider 
-            item={item} 
-            cartItems={cartItems} 
-            index={index} 
-            upCartItemByOne={upCartItemByOne} 
+          <Slider
+            item={item}
+            cartItems={cartItems}
+            index={index}
+            upCartItemByOne={upCartItemByOne}
             minusCartItemByOne={minusCartItemByOne}
           />
         </div>
@@ -44,10 +50,7 @@ class CartItem extends PureComponent {
   }
 }
 
-export default connect(
-  (state) => ({ cart: state }),
-  {
-    upCartItemByOne,
-    minusCartItemByOne
-  }
-)(CartItem);
+export default connect((state) => ({ cart: state }), {
+  upCartItemByOne,
+  minusCartItemByOne,
+})(CartItem);
