@@ -5,15 +5,13 @@ import { getTitle, getSubTitle, getPrice } from "../../utility";
 import {connect} from 'react-redux'
 //actions
 import { upCartItemByOne, minusCartItemByOne } from "../../actions/cartAction";
-//imgs
-import prevBtn from '../../icons/prevBtn.png';
-import nextBtn from '../../icons/nextBtn.png';
+//components
+import Slider from '../Cart slider/CartSlider';
 
 class CartItem extends PureComponent {
 
   render() {
     const { item, index, cartItems, selectedCurrency, upCartItemByOne, minusCartItemByOne } = this.props;
-
     return (
       <>
         <div className="cart-page__cart-item">
@@ -59,63 +57,13 @@ class CartItem extends PureComponent {
               </div>
             ))}
           </div>
-          <div className="cart-page-item-gallery">
-            <div className="cart-page-item-gallery__qty-btns">
-              <button
-                className="cart-page-item-gallery__qty-btns__add"
-                onClick={() => {
-                  upCartItemByOne(item)
-                }
-                }
-              >
-                +
-              </button>
-              {!cartItems[index].qty ? (
-                0
-              ) : (
-                <p>{cartItems[index].qty}</p>
-              )}
-              <button
-                className="cart-page-item-gallery__qty-btns__take-away"
-                onClick={() => {
-                  minusCartItemByOne(item);
-                }}
-              >
-                -
-              </button>
-            </div>
-            <div className="cart-page-item-gallery__img-wrapper">
-              <img id="0" src={item.gallery[0]} alt={`${item.name}`} />
-              <div className="cart-page-item-gallery__img-wrapper__btns-wrapper">
-                <button
-                  onClick={(e) => {
-                    this.setPrevGalleryImg(e, item);
-                  }}
-                  className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__prev-btn "
-                >
-                  {" "}
-                  <img
-                    className="btn-icon icon"
-                    alt="previuse"
-                    src={prevBtn}
-                  />{" "}
-                </button>
-                <button
-                  onClick={(e) => {
-                    this.setNextGalleryImg(e, item);
-                  }}
-                  className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__next-btn"
-                >
-                  {" "}
-                  <img
-                    className="btn-icon icon"
-                    alt="next"
-                    src={nextBtn}
-                  />{" "}
-                </button>
-              </div>
-            </div>
-          </div>
+          <Slider 
+            item={item} 
+            cartItems={cartItems} 
+            index={index} 
+            upCartItemByOne={upCartItemByOne} 
+            minusCartItemByOne={minusCartItemByOne}
+          />
         </div>
       </>
     );

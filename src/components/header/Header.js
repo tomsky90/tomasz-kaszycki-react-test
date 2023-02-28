@@ -104,22 +104,20 @@ class Header extends Component {
                   alt=""
                 />
               </div>
-              <div
-               
-                className="header__cart-icon-container"
-              >
-                {this.props.cart.cartItems.length > 0 && (
-                  <div className="header__cart-icon-container__items-in-cart">
-                    {this.totalItemsInCart()}
-                  </div>
-                )}
-                <img 
-                  onClick={() => {
-                    this.toggleBagPageActive();
+              <div className="header__cart-icon-container">
+                <div onClick={() => {
+                  this.toggleBagPageActive();
                   }}
-                  ref={this.cartBtnRef}
-                  src={cartIcon} alt="cart icon" 
-                />
+                  ref={this.cartBtnRef}>
+                  {this.props.cart.cartItems.length > 0 && (
+                    <div className="header__cart-icon-container__items-in-cart">
+                      {this.totalItemsInCart()}
+                    </div>
+                  )}
+                  <img 
+                    src={cartIcon} alt="cart icon" 
+                  />
+                </div>
                 {this.state.isBagPageActive && (
                   <BagPage
                     cartBtnRef={this.cartBtnRef}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 //redux
 import { connect } from "react-redux";
-import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
 //helpers
 import { getPrice} from "../utility";
 //components
@@ -12,32 +11,6 @@ import Spinner from "../components/spinner/Spinner";
 
 class CartPage extends Component {
  
-
-  setPrevGalleryImg(event, item) {
-    //get img id
-    let index =  event.target.parentNode.parentNode.parentNode.firstChild.getAttribute('id');
-    if( index < 1) {
-      return
-    } else {
-      index--
-      event.target.parentNode.parentNode.parentNode.firstChild.setAttribute("src", `${item.gallery[index]}`);
-      event.target.parentNode.parentNode.parentNode.firstChild.setAttribute("id", index);
-    }
-  }
-
-  setNextGalleryImg(event, item) {
-    //get img id
-    let index =  event.target.parentNode.parentNode.parentNode.firstChild.getAttribute('id');
-    if( item.gallery.length -1 <= index) {
-      return
-    } else {
-      index++
-      event.target.parentNode.parentNode.parentNode.firstChild.setAttribute("src", `${item.gallery[index]}`);
-      event.target.parentNode.parentNode.parentNode.firstChild.setAttribute("id", index);
-    }
-  }
-
-
   totalItemsInCart = () => {
     let total = null;
     this.props.cart.cart.cartItems.forEach((element) => {
@@ -88,8 +61,6 @@ class CartPage extends Component {
               index={index}
               cartItems={cartItems}
               selectedCurrency={selectedCurrency}
-              upCartItemByOne={upCartItemByOne}
-              minusCartItemByOne={minusCartItemByOne}
              />
           ))}
           {this.totalItemsInCart() > 0 ? (
@@ -117,8 +88,6 @@ class CartPage extends Component {
 export default connect(
     (state) => ({ cart: state, currencies: state.currencies }),
     {
-      upCartItemByOne,
-      minusCartItemByOne
     }
   )(CartPage);
   
