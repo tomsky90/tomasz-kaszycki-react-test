@@ -1,0 +1,37 @@
+.cart-page__attribute {
+  p {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Roboto Condensed';
+      margin-top: 15px;
+      margin-bottom: 10px;
+  }
+  &__description{
+      &__attribute--text {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 63px;
+          height: 43px;
+          border: 1px solid #000;
+          font-weight: 400;
+          font-family: 'Source Sans Pro';
+          &.attribute.active {
+              background-color: #000;
+              color: #fff;
+          }
+      }
+      &__attribute--swatch {
+          width: 32px;
+          height: 32px;
+          border: 1px solid black;
+          &.attribute.active {
+              border: 2px solid $Theam-Color;
+          }
+      }
+      &__attributes-wrapper {
+          display: flex;
+          column-gap: 10px;
+      }
+  }
+}
