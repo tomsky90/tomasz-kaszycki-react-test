@@ -17,14 +17,3 @@ export const getPrice = (prices, symbol) => {
     const price = prices.filter(price => price.currency.symbol === symbol)
    return price[0].amount
 }
-
-export const showMessage = (message) => {
-  const element = document.querySelector('.message')
-  element.textContent = message;
-  element.classList.add('active')
-
-  setTimeout(() => {
-    element.classList.remove('active')
-  }, 3000);
-
-};

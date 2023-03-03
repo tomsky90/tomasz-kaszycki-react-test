@@ -3,7 +3,8 @@ import { fetchProduct } from "../actions/productActions";
 import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/cartAction";
-import { getTitle, getSubTitle,showMessage } from "../utility";
+import { showMessage, hideMessage } from "../actions/messageAction";
+import { getTitle, getSubTitle } from "../utility";
 //componnents
 import Spinner from "../components/spinner/Spinner";
 
@@ -13,7 +14,7 @@ class ProductPage extends Component {
     this.state = {
       img: "",
       defaultAttributes: {},
-      error: 'false',
+      error: "false",
     };
   }
 
@@ -85,7 +86,7 @@ class ProductPage extends Component {
   };
 
   selectAttribute = (id, value) => {
-    const selectAttributes = {...this.state.defaultAttributes };
+    const selectAttributes = { ...this.state.defaultAttributes };
     selectAttributes[id].selectedValue = value;
     this.setState({
       defaultAttributes: selectAttributes,
@@ -93,52 +94,51 @@ class ProductPage extends Component {
   };
 
   validateProduct = (item) => {
-    const itemCopy = {...item.product};
+    const itemCopy = { ...item.product };
     //if product has no attributes add it to cart
-        if(itemCopy.attributes.length === 0) {
-            this.props.addToCart(itemCopy)
-            showMessage(`${itemCopy.name} added to cart!`)
-        } else {
-            //check if all attriubutes are selected
-            let isSelected = true
-            
-            for(const value in this.state.defaultAttributes) {
-                if(this.state.defaultAttributes[value].selectedValue === null) {
-                    isSelected = false
-                    this.setState({
-                      error: true
-                    })
-                }
-               
-            }
-            if(isSelected) {
-              this.setState({
-                error: false
-              })
-                const refacoredAttributes = [];
-                const attributes =  itemCopy.attributes;
-                attributes.forEach(element => {
-                    element =  {
-                        type: element.type,
-                        selectedValue: this.state.defaultAttributes[element.id].selectedValue,
-                        element: element.id,
-                        items: element.items
-                    };
-                    refacoredAttributes.push(element)
-                   });
-                   itemCopy.attributes = refacoredAttributes
-                   this.props.addToCart(itemCopy)
-                   showMessage(`${itemCopy.name} added to cart!`)
-                   
-            }
+    if (itemCopy.attributes.length === 0) {
+      this.props.addToCart(itemCopy);
+    } else {
+      //check if all attriubutes are selected
+      let isSelected = true;
+
+      for (const value in this.state.defaultAttributes) {
+        if (this.state.defaultAttributes[value].selectedValue === null) {
+          isSelected = false;
+          this.setState({
+            error: true,
+          });
         }
-  }
+      }
+      if (isSelected) {
+        this.setState({
+          error: false,
+        });
+        const refacoredAttributes = [];
+        const attributes = itemCopy.attributes;
+        attributes.forEach((element) => {
+          element = {
+            type: element.type,
+            selectedValue:
+              this.state.defaultAttributes[element.id].selectedValue,
+            element: element.id,
+            items: element.items,
+          };
+          refacoredAttributes.push(element);
+        });
+        itemCopy.attributes = refacoredAttributes;
+        this.props.addToCart(itemCopy);
+        this.props.showMessage(`${itemCopy.name} added to cart!`)
+        setTimeout(() => {
+          this.props.hideMessage()
+        }, 3000)
+      }
+    }
+  };
 
   render() {
-    if(!this.props?.products?.item?.product) {
-      return(
-        <Spinner/>
-      )
+    if (!this.props?.products?.item?.product) {
+      return <Spinner />;
     }
     return (
       <div className="product-page__page-wrapper">
@@ -229,20 +229,27 @@ class ProductPage extends Component {
             </p>
           </div>
           <div>
-            {this.state.error === true && <p className="error-message">Please select all options</p>}
-          {this.props?.products?.item?.product?.inStock && (
-            <button onClick={() => {this.validateProduct(this.props?.products?.item)}} className="product-page__description-wrapper__add-to-cart-btn">
-              ADD TO CART
-            </button>
-          )}
-          {!this.props?.products?.item?.product?.inStock && (
-            <h4 className="product-page__description-wrapper__out-of-stock">
-              We are sorry! Item currently out of Stock.
-            </h4>
-          )}
+            {this.state.error === true && (
+              <p className="error-message">Please select all options</p>
+            )}
+            {this.props?.products?.item?.product?.inStock && (
+              <button
+                onClick={() => {
+                  this.validateProduct(this.props?.products?.item)
+                }}
+                className="product-page__description-wrapper__add-to-cart-btn"
+              >
+                ADD TO CART
+              </button>
+            )}
+            {!this.props?.products?.item?.product?.inStock && (
+              <h4 className="product-page__description-wrapper__out-of-stock">
+                We are sorry! Item currently out of Stock.
+              </h4>
+            )}
           </div>
 
-          <div className="product-page__description-wrapper__product-description">
+          <div className="product-page__description-wrapper__product-description"> 
             {parse(`${this.props?.products?.item?.product?.description}`)}
           </div>
         </div>
@@ -252,9 +259,16 @@ class ProductPage extends Component {
 }
 
 export default connect(
-  (state) => ({ products: state.products, currencies: state.currencies, cart: state }),
+  (state) => ({
+    products: state.products,
+    currencies: state.currencies,
+    cart: state,
+    message: state,
+  }),
   {
     fetchProduct,
-    addToCart
+    addToCart,
+    showMessage,
+    hideMessage
   }
 )(ProductPage);

@@ -10,6 +10,7 @@
 @import '_cartItem.scss';
 @import '_cartSlider.scss';
 @import '_cartAttributes.scss';
+@import '_message.scss';
 
 *{
     margin: 0;
@@ -27,22 +28,4 @@ body{
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.message {
-position: fixed;
-left: 48%;
-transform: translateY(-200px);
-top: 105px;
-border: 1px solid $Theam-Color;
-padding: 10px 20px ;
-border-radius: 8px;
-color: $Theam-Color;
-transition: .5s ease-in-out;
-z-index: 5;
-background-color: #fff;
-}
-
-.message.active {
-    transform: translateY(0);
 }

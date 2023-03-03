@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { productsReducer } from "./reducers/productsReducer";
 import { currenciesReducer } from "./reducers/currenciesReducer";
 import { cartReducer } from "./reducers/cartReducer";
+import { messageReducer } from "./reducers/messageReducer";
 
 
 const initialState = {};
@@ -12,6 +13,7 @@ const store = createStore(
     products: productsReducer,
     currencies: currenciesReducer,
     cart: cartReducer,
+    message: messageReducer,
   }),
   initialState,
   composeEnhancer(applyMiddleware(thunk))

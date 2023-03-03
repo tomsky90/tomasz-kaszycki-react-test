@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 //components
 import Header from './components/header/Header';
 import ProductPage from './pages/ProductPage';
+import Message from './components/message/Message';
 //pages
 import CategoryPage from './pages/Category';
 import CartPage from './pages/CartPage';
@@ -28,8 +29,7 @@ class App extends Component {
       <Provider store={store}>
       <BrowserRouter>
       <div className='app-wrapper'>
-        <div className='message'>
-        </div>
+        <Message/>
         <Header/>
         <Routes>
           <Route path='/:name' element={<Wrapper/>}/>

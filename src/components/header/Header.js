@@ -50,16 +50,16 @@ class Header extends Component {
   };
 
   toggleBagPageActive = () => {
-  this.setState({
-    isBagPageActive: !this.state.isBagPageActive
-  })
+    this.setState({
+      isBagPageActive: !this.state.isBagPageActive,
+    });
   };
 
   closeBagPage = (e) => {
     this.setState({
       isBagPageActive: false,
     });
-  }
+  };
 
   totalItemsInCart = () => {
     let total = null;
@@ -105,18 +105,18 @@ class Header extends Component {
                 />
               </div>
               <div className="header__cart-icon-container">
-                <div onClick={() => {
-                  this.toggleBagPageActive();
+                <div
+                  onClick={() => {
+                    this.toggleBagPageActive();
                   }}
-                  ref={this.cartBtnRef}>
+                  ref={this.cartBtnRef}
+                >
                   {this.props.cart.cartItems.length > 0 && (
                     <div className="header__cart-icon-container__items-in-cart">
                       {this.totalItemsInCart()}
                     </div>
                   )}
-                  <img 
-                    src={cartIcon} alt="cart icon" 
-                  />
+                  <img src={cartIcon} alt="cart icon" />
                 </div>
                 {this.state.isBagPageActive && (
                   <BagPage
@@ -124,7 +124,7 @@ class Header extends Component {
                     hideBagePage={this.closeBagPage}
                     isBagPageActive={this.state.isBagPageActive}
                   />
-        )}
+                )}
               </div>
             </div>
             <div
@@ -154,8 +154,6 @@ class Header extends Component {
             </div>
           </div>
         </div>
-
-       
       </header>
     );
   }

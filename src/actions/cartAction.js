@@ -36,7 +36,6 @@ export const minusCartItemByOne = (product) => (dispatch, getState) => {
     if(exists) {
       exists.qty--
       if(exists.qty === 0) {
-        console.log(exists)
         cartItems = cartItems.filter(element => (JSON.stringify(element.attributes) !== JSON.stringify(product.attributes) || element.id !== product.id))
       }
     }
