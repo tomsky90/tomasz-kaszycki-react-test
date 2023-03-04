@@ -66,18 +66,18 @@ class Slider extends PureComponent {
           <img src={item.gallery[this.state.index]} alt={`${item.name}`} />
           <div className="cart-page-item-gallery__img-wrapper__btns-wrapper">
             <button
+              className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__prev-btn "
               onClick={(e) => {
                 this.setPrevGalleryImg(item);
               }}
-              className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__prev-btn "
             >
               <img className="btn-icon icon" alt="previuse" src={prevBtn} />
             </button>
             <button
+              className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__next-btn"
               onClick={(e) => {
                 this.setNextGalleryImg(item);
               }}
-              className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__next-btn"
             >
               <img className="btn-icon icon" alt="next" src={nextBtn} />
             </button>
