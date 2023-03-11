@@ -6,48 +6,35 @@ import { addToCart } from "../actions/cartAction";
 import { showMessage, hideMessage } from "../actions/messageAction";
 import { getTitle, getSubTitle } from "../utility";
 //componnents
+import Gallery from "../components/gallery/Gallery";
 import Spinner from "../components/spinner/Spinner";
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: "",
       defaultAttributes: {},
       error: "false",
     };
   }
 
-  //set big img in gallery on load
-  static getDerivedStateFromProps(props, state) {
-    if (state.img === "" || state.img === undefined) {
-      return (state = {
-        img: props.products.item?.product?.gallery[0],
-      });
-    }
-
-    return null;
-  }
-
   //fetch item data
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
-    this.setDefaultAttribute();
+    this.setDefaultAttribute()
   }
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.products?.item?.product?.attributes !== undefined &&
-      this.props.products?.item?.product?.attributes !==
-        prevProps.products?.item?.product?.attributes
+      this.props.product?.attributes !== undefined &&
+      this.props.product?.attributes !==
+        prevProps.product?.attributes
     ) {
       if (
-        this.props.products?.item?.product?.attributes !==
-        prevProps.products?.item?.product?.attributes
+        this.props.product.attributes !==
+        prevProps.product?.attributes
       ) {
-        this.setDefaultAttribute(
-          this.props.products?.item?.product?.attributes
-        );
+        this.setDefaultAttribute();
       }
     }
   }
@@ -55,7 +42,7 @@ class ProductPage extends Component {
   setDefaultAttribute = () => {
     const refacoredAttributes = {};
     let elementId = "";
-    this.props.products.item?.product?.attributes.forEach((element) => {
+    this.props.product?.attributes.forEach((element) => {
       elementId = element.id;
       refacoredAttributes[elementId] = {
         type: element.type,
@@ -63,22 +50,14 @@ class ProductPage extends Component {
         element: element.id,
       };
     });
-
     this.setState({
       defaultAttributes: refacoredAttributes,
     });
   };
 
-  //set  big img in gallery on click
-  setImgSrc = (e) => {
-    this.setState({
-      img: e.target.src,
-    });
-  };
-
   // get right amount for selected currency
   filteredPrice = () => {
-    const price = this.props?.products?.item?.product?.prices.filter(
+    const price = this.props?.product?.prices.filter(
       (price) =>
         price.currency.symbol === this.props.currencies.selectedCurrency.symbol
     );
@@ -91,10 +70,11 @@ class ProductPage extends Component {
     this.setState({
       defaultAttributes: selectAttributes,
     });
+    
   };
 
   validateProduct = (item) => {
-    const itemCopy = { ...item.product };
+    const itemCopy = { ...item };
     //if product has no attributes add it to cart
     if (itemCopy.attributes.length === 0) {
       this.props.addToCart(itemCopy);
@@ -128,50 +108,31 @@ class ProductPage extends Component {
         });
         itemCopy.attributes = refacoredAttributes;
         this.props.addToCart(itemCopy);
-        this.props.showMessage(`${itemCopy.name} added to cart!`)
+        this.props.showMessage(`${itemCopy.name} added to cart!`);
         setTimeout(() => {
-          this.props.hideMessage()
-        }, 3000)
+          this.props.hideMessage();
+        }, 3000);
       }
     }
   };
 
   render() {
-    if (!this.props?.products?.item?.product) {
+    if (!this.props?.product) {
       return <Spinner />;
     }
     return (
       <div className="product-page__page-wrapper">
-        <div className="product-page gallery-wrapper">
-          <div className="gallery-wrapper__thumbnails">
-            {this.props?.products?.item?.product.gallery.map((img) => (
-              <div
-                key={img}
-                onClick={(e) => {
-                  this.setImgSrc(e);
-                }}
-                className="gallery-wrapper__thumbnails__img-wrapper"
-              >
-                <img src={img} alt="" />
-              </div>
-            ))}
-          </div>
-          <div className="gallery-wrapper__big-img-wrapper">
-            <img src={this.state.img} alt="" />
-          </div>
-        </div>
+        <Gallery gallery={this.props.product.gallery} />
         <div className="product-page__description-wrapper">
           <h1 className="product-page__description-wrapper__title">
-            {this.props?.products?.item?.product?.name &&
-              getTitle(this.props?.products?.item?.product?.name)}
+            {this.props.product.name && getTitle(this.props.product.name)}
           </h1>
           <p className="product-page__description-wrapper__sub-title">
-            {this.props?.products?.item?.product?.name &&
-              getSubTitle(this.props?.products?.item?.product?.name)}
+            {this.props.product.name && getSubTitle(this.props.product.name)}
           </p>
 
-          {this.props?.products?.item?.product?.attributes &&
-            this.props?.products?.item?.product?.attributes.map((attribute) => (
+          {this.props.product.attributes &&
+            this.props.product.attributes.map((attribute) => (
               <div
                 key={attribute.id}
                 className="product-page__description-wrapper__attributes"
@@ -224,33 +185,32 @@ class ProductPage extends Component {
             </p>
             <p className="product-page__description-wrapper__attribute-title__price">
               <span>{this.props.currencies.selectedCurrency.symbol} </span>
-              {this.props?.products?.item?.product?.prices &&
-                this.filteredPrice()}
+              {this.props.product.prices && this.filteredPrice()}
             </p>
           </div>
           <div>
             {this.state.error === true && (
               <p className="error-message">Please select all options</p>
             )}
-            {this.props?.products?.item?.product?.inStock && (
+            {this.props.product.inStock && (
               <button
                 onClick={() => {
-                  this.validateProduct(this.props?.products?.item)
+                  this.validateProduct(this.props.product);
                 }}
                 className="product-page__description-wrapper__add-to-cart-btn"
               >
                 ADD TO CART
               </button>
             )}
-            {!this.props?.products?.item?.product?.inStock && (
+            {!this.props.product.inStock && (
               <h4 className="product-page__description-wrapper__out-of-stock">
                 We are sorry! Item currently out of Stock.
               </h4>
             )}
           </div>
 
-          <div className="product-page__description-wrapper__product-description"> 
-            {parse(`${this.props?.products?.item?.product?.description}`)}
+          <div className="product-page__description-wrapper__product-description">
+            {parse(`${this.props?.product?.description}`)}
           </div>
         </div>
       </div>
@@ -260,7 +220,7 @@ class ProductPage extends Component {
 
 export default connect(
   (state) => ({
-    products: state.products,
+    product: state?.products?.item?.product,
     currencies: state.currencies,
     cart: state,
     message: state,
@@ -269,6 +229,6 @@ export default connect(
     fetchProduct,
     addToCart,
     showMessage,
-    hideMessage
+    hideMessage,
   }
 )(ProductPage);

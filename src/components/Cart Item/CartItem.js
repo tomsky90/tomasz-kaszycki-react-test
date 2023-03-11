@@ -34,7 +34,7 @@ class CartItem extends PureComponent {
               {getPrice(item.prices, selectedCurrency?.symbol)}
             </p>
             {item.attributes.map((attr) => (
-              <Attributes attr={attr} />
+              <Attributes key={attr.element} attr={attr} />
             ))}
           </div>
           <Slider

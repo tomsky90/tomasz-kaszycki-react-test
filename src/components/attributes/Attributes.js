@@ -11,7 +11,7 @@ class Attributes extends PureComponent {
             attr.items &&
             attr.items.map((item) => (
               <div
-                key={item.id}
+                key={item.value}
                 className={`cart-page__attribute__description__attribute--text attribute${
                   attr.selectedValue === item.value ? " active" : ""
                 }`}
@@ -23,7 +23,7 @@ class Attributes extends PureComponent {
             attr.items &&
             attr.items.map((item) => (
               <div
-                key={item.id}
+                key={item.value}
                 style={{ backgroundColor: `${item.value}` }}
                 className={`cart-page__attribute__description__attribute--swatch attribute${
                   attr.selectedValue === item.value ? " active" : ""
