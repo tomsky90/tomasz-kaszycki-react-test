@@ -7,6 +7,7 @@ import { showMessage, hideMessage } from "../actions/messageAction";
 import { getTitle, getSubTitle } from "../utility";
 //componnents
 import Gallery from "../components/gallery/Gallery";
+import ProductPageAttributes from "../components/productPageAttributes/ProductPageAttributes";
 import Spinner from "../components/spinner/Spinner";
 
 class ProductPage extends Component {
@@ -41,10 +42,8 @@ class ProductPage extends Component {
 
   setDefaultAttribute = () => {
     const refacoredAttributes = {};
-    let elementId = "";
     this.props.product?.attributes.forEach((element) => {
-      elementId = element.id;
-      refacoredAttributes[elementId] = {
+      refacoredAttributes[element.id] = {
         type: element.type,
         selectedValue: null,
         element: element.id,
@@ -81,7 +80,6 @@ class ProductPage extends Component {
     } else {
       //check if all attriubutes are selected
       let isSelected = true;
-
       for (const value in this.state.defaultAttributes) {
         if (this.state.defaultAttributes[value].selectedValue === null) {
           isSelected = false;
@@ -130,55 +128,11 @@ class ProductPage extends Component {
           <p className="product-page__description-wrapper__sub-title">
             {this.props.product.name && getSubTitle(this.props.product.name)}
           </p>
-
-          {this.props.product.attributes &&
-            this.props.product.attributes.map((attribute) => (
-              <div
-                key={attribute.id}
-                className="product-page__description-wrapper__attributes"
-              >
-                <p className="product-page__description-wrapper__attribute-title">
-                  {attribute.name.toUpperCase()}:
-                </p>
-                <div className="product-page__description-wrapper__attributes-wrapper">
-                  {attribute.type === "text" &&
-                    attribute?.items &&
-                    attribute?.items.map((item) => (
-                      <div
-                        onClick={() => {
-                          this.selectAttribute(attribute.id, item.value);
-                        }}
-                        key={item.id}
-                        className={`product-page__description-wrapper__attribute--text attribute${
-                          this.state.defaultAttributes[attribute.id]
-                            ?.selectedValue === item.value
-                            ? " active"
-                            : ""
-                        }`}
-                      >
-                        {item.value}
-                      </div>
-                    ))}
-                  {attribute.type === "swatch" &&
-                    attribute?.items &&
-                    attribute?.items.map((item) => (
-                      <div
-                        onClick={() => {
-                          this.selectAttribute(attribute.id, item.value);
-                        }}
-                        key={item.id}
-                        style={{ backgroundColor: `${item.value}` }}
-                        className={`product-page__description-wrapper__attribute--swatch attribute${
-                          this.state.defaultAttributes[attribute.id]
-                            ?.selectedValue === item.value
-                            ? " active"
-                            : ""
-                        }`}
-                      ></div>
-                    ))}
-                </div>
-              </div>
-            ))}
+          <ProductPageAttributes 
+            attributes={this.props.product.attributes}
+            defaultAttributes={this.state.defaultAttributes}
+            selectAttribute={this.selectAttribute}
+          />
           <div className="product-page__description-wrapper__price-wrapper">
             <p className="product-page__description-wrapper__attribute-title">
               PRICE:
