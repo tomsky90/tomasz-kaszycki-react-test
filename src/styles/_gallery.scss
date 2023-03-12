@@ -1,0 +1,26 @@
+.gallery-wrapper{
+  display: flex;
+  column-gap: 2rem;
+  margin-right: 100px;
+  width: 55%;
+  &__thumbnails {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+      width: 100px;
+      cursor: pointer;
+      &__img-wrapper {
+          & img {
+              width: 100px;
+              height: 100px;
+              object-fit: contain;
+          }
+      }
+  }
+  &__big-img-wrapper{
+      width: 610px;
+      & img{
+          width: 90%;
+      }
+  }
+}
