@@ -7,9 +7,6 @@ import ProductDetailComponent from "../components/productDetail/ProductDetailCom
 import Spinner from "../components/spinner/Spinner";
 
 class CategoryPage extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.fetchProducts(this.props.match.params.name);

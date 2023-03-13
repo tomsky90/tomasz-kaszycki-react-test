@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { NavLink } from "react-router-dom";
 import { getCurrencies } from "../../actions/currencyAction";
 import { connect } from "react-redux";
@@ -8,7 +8,7 @@ import logoIcon from "../../icons/a-logo.png";
 //components & pages
 import CurrencySwitcher from "../currency switcher/CurrencySwitcher";
 
-class Header extends Component {
+class Header extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

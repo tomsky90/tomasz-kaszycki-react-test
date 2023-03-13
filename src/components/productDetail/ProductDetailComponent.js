@@ -38,34 +38,36 @@ class ProductDetailComponent extends PureComponent {
   };
 
   render() {
+    const { item, symbol } = this.props;
+    const { name} = this.props.products.category;
     return (
       <div className="product-detail-component">
-        <Link to={`/${this.props.products?.category?.name}/${this.props.item.id}`}>
+        <Link to={`/${name}/${item.id}`}>
           <div className="product-detail-component__img-wrapper">
-            {!this.props.item.inStock && (
+            {!item.inStock && (
               <div className="product-detail-component__out-of-stock-img-cover">
                 <p>OUT OF STOCK</p>
               </div>
             )}
-            <img src={this.props.item?.gallery[0]} alt="" />
+            <img src={item.gallery[0]} alt="" />
           </div>
 
           <div
             className={
-              this.props.item.inStock
+              item.inStock
                 ? "product-detail-component__text-container"
                 : "product-detail-component__text-container out-of-stock"
             }
           >
-            <p>{this.props.item.name}</p>
+            <p>{item.name}</p>
             <p className="product-detail-component__price-container">
-              {this.props.symbol} {getPrice(this.props.item?.prices, this.props.symbol)}
+              {symbol} {getPrice(item.prices, symbol)}
             </p>
           </div>
         </Link>
         {this.props.item.inStock && (
           <div className="product-detail-component__img-wrapper__cart-icon"
-            onClick={() => { this.validateProduct(this.props.item) }}
+            onClick={() => { this.validateProduct(item) }}
           >
             <img src={cartIcon} alt="" />
           </div>

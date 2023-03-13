@@ -46,18 +46,14 @@ class Slider extends PureComponent {
         <div className="cart-page-item-gallery__qty-btns">
           <button
             className="cart-page-item-gallery__qty-btns__add"
-            onClick={() => {
-              upCartItemByOne(item);
-            }}
+            onClick={() => {upCartItemByOne(item)}}
           >
             +
           </button>
           {!cartItems[index].qty ? 0 : <p>{cartItems[index].qty}</p>}
           <button
             className="cart-page-item-gallery__qty-btns__take-away"
-            onClick={() => {
-              minusCartItemByOne(item);
-            }}
+            onClick={() => {minusCartItemByOne(item)}}
           >
             -
           </button>
@@ -67,17 +63,13 @@ class Slider extends PureComponent {
           <div className="cart-page-item-gallery__img-wrapper__btns-wrapper">
             <button
               className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__prev-btn "
-              onClick={(e) => {
-                this.setPrevGalleryImg(item);
-              }}
+              onClick={() => { this.setPrevGalleryImg(item)}}
             >
               <img className="btn-icon icon" alt="previuse" src={prevBtn} />
             </button>
             <button
               className="cart-page-item-gallery__img-wrapper__btns-wrapper__img__next-btn"
-              onClick={(e) => {
-                this.setNextGalleryImg(item);
-              }}
+              onClick={() => {this.setNextGalleryImg(item)}}
             >
               <img className="btn-icon icon" alt="next" src={nextBtn} />
             </button>

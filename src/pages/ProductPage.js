@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { fetchProduct } from "../actions/productActions";
-import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/cartAction";
 import { showMessage, hideMessage } from "../actions/messageAction";
-import { getTitle, getSubTitle } from "../utility";
 //componnents
 import Gallery from "../components/gallery/Gallery";
-import ProductPageAttributes from "../components/productPageAttributes/ProductPageAttributes";
 import Spinner from "../components/spinner/Spinner";
+import ProductPageItem from "../components/productPageItem/ProductPageItem";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -22,19 +20,15 @@ class ProductPage extends Component {
   //fetch item data
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
-    this.setDefaultAttribute()
+    this.setDefaultAttribute();
   }
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.product?.attributes !== undefined &&
-      this.props.product?.attributes !==
-        prevProps.product?.attributes
+      this.props.attributes !== undefined &&
+      this.props.attributes !== prevProps.attributes
     ) {
-      if (
-        this.props.product.attributes !==
-        prevProps.product?.attributes
-      ) {
+      if (this.props.attributes !== prevProps.attributes) {
         this.setDefaultAttribute();
       }
     }
@@ -54,22 +48,12 @@ class ProductPage extends Component {
     });
   };
 
-  // get right amount for selected currency
-  filteredPrice = () => {
-    const price = this.props?.product?.prices.filter(
-      (price) =>
-        price.currency.symbol === this.props.currencies.selectedCurrency.symbol
-    );
-    return price[0].amount;
-  };
-
   selectAttribute = (id, value) => {
     const selectAttributes = { ...this.state.defaultAttributes };
     selectAttributes[id].selectedValue = value;
     this.setState({
       defaultAttributes: selectAttributes,
     });
-    
   };
 
   validateProduct = (item) => {
@@ -121,52 +105,14 @@ class ProductPage extends Component {
     return (
       <div className="product-page__page-wrapper">
         <Gallery gallery={this.props.product.gallery} />
-        <div className="product-page__description-wrapper">
-          <h1 className="product-page__description-wrapper__title">
-            {this.props.product.name && getTitle(this.props.product.name)}
-          </h1>
-          <p className="product-page__description-wrapper__sub-title">
-            {this.props.product.name && getSubTitle(this.props.product.name)}
-          </p>
-          <ProductPageAttributes 
-            attributes={this.props.product.attributes}
-            defaultAttributes={this.state.defaultAttributes}
-            selectAttribute={this.selectAttribute}
-          />
-          <div className="product-page__description-wrapper__price-wrapper">
-            <p className="product-page__description-wrapper__attribute-title">
-              PRICE:
-            </p>
-            <p className="product-page__description-wrapper__attribute-title__price">
-              <span>{this.props.currencies.selectedCurrency.symbol} </span>
-              {this.props.product.prices && this.filteredPrice()}
-            </p>
-          </div>
-          <div>
-            {this.state.error === true && (
-              <p className="error-message">Please select all options</p>
-            )}
-            {this.props.product.inStock && (
-              <button
-                onClick={() => {
-                  this.validateProduct(this.props.product);
-                }}
-                className="product-page__description-wrapper__add-to-cart-btn"
-              >
-                ADD TO CART
-              </button>
-            )}
-            {!this.props.product.inStock && (
-              <h4 className="product-page__description-wrapper__out-of-stock">
-                We are sorry! Item currently out of Stock.
-              </h4>
-            )}
-          </div>
-
-          <div className="product-page__description-wrapper__product-description">
-            {parse(`${this.props?.product?.description}`)}
-          </div>
-        </div>
+        <ProductPageItem
+          product={this.props.product}
+          defaultAttributes={this.state.defaultAttributes}
+          selectAttribute={this.selectAttribute}
+          currencies={this.props.currencies}
+          error={this.state.error}
+          validateProduct={this.validateProduct}
+        />
       </div>
     );
   }
@@ -174,9 +120,9 @@ class ProductPage extends Component {
 
 export default connect(
   (state) => ({
+    attributes: state?.products?.item?.product?.attributes,
     product: state?.products?.item?.product,
     currencies: state.currencies,
-    cart: state,
     message: state,
   }),
   {

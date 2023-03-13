@@ -15,21 +15,31 @@ class CurrencySwitcher extends PureComponent {
   };
 
   render() {
+    const {
+      currencySwitcherRef,
+      toggleOptionsActive,
+      isOptionsActive,
+      isBagPageActive,
+      cartBtnRef,
+      toggleBagPageActive,
+      setSelectedCurrency,
+    } = this.props;
+    const { currencies } = this.props.currencies.currencies;
+    const { symbol } = this.props.currencies.selectedCurrency;
+    const { cartItems } = this.props.cart;
     return (
       <div className="header__cart-icon-currency-switcher-wrapper">
         <div className="header__currency-switcher-container">
           <div className="currency-switcher__select-bar">
             <div
               className="currency-switcher__icon"
-              ref={this.props.currencySwitcherRef}
-              onClick={() => {
-                this.props.toggleOptionsActive();
-              }}
+              ref={currencySwitcherRef}
+              onClick={() => {toggleOptionsActive()}}
             >
-              <span>{this.props.currencies?.selectedCurrency?.symbol}</span>
+              <span>{symbol}</span>
               <img
                 className={
-                  this.props.isOptionsActive
+                  isOptionsActive
                     ? "currenccy-switcher__arrow active"
                     : "currenccy-switcher__arrow"
                 }
@@ -39,40 +49,38 @@ class CurrencySwitcher extends PureComponent {
             </div>
             <div className="header__cart-icon-container">
               <div
-                onClick={() => {
-                  this.props.toggleBagPageActive();
-                }}
-                ref={this.props.cartBtnRef}
+                onClick={() => {toggleBagPageActive()}}
+                ref={cartBtnRef}
               >
-                {this.props.cart.cartItems.length > 0 && (
+                {cartItems.length > 0 && (
                   <div className="header__cart-icon-container__items-in-cart">
                     {this.totalItemsInCart()}
                   </div>
                 )}
                 <img src={cartIcon} alt="cart icon" />
               </div>
-              {this.props.isBagPageActive && (
+              {isBagPageActive && (
                 <BagPage
                   cartBtnRef={this.props.cartBtnRef}
                   hideBagePage={this.props.closeBagPage}
-                  isBagPageActive={this.props.isBagPageActive}
+                  isBagPageActive={isBagPageActive}
                 />
               )}
             </div>
           </div>
           <div
             className={
-              this.props.isOptionsActive
+              isOptionsActive
                 ? "currency-switcher__options-wrapper active"
                 : "currency-switcher__options-wrapper"
             }
           >
-            {this.props.currencies.currencies.currencies !== undefined
-              ? this.props.currencies.currencies.currencies.map((currency) => (
+            {currencies !== undefined
+              ? currencies.map((currency) => (
                   <div
                     onClick={() => {
-                      this.props.setSelectedCurrency(currency);
-                      this.props.toggleOptionsActive();
+                      setSelectedCurrency(currency);
+                      toggleOptionsActive();
                     }}
                     key={currency.label}
                     className="option"
