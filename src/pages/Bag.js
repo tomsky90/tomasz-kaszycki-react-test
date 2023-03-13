@@ -86,36 +86,6 @@ class BagPage extends PureComponent {
                 {item.attributes.map((attr) => (
                   <Attributes key={attr.element} attr={attr} className='bag-page'/>
                 ))}
-                {/* {item.attributes.map((attr) => (
-                  <div key={attr.element} className="bag-page__attribute">
-                    <p>{attr.element}</p>
-                    <div className="bag-page__attribute__description__attributes-wrapper">
-                      {attr.type === "text" &&
-                        attr.items &&
-                        attr.items.map((item) => (
-                          <div
-                            key={item.id}
-                            className={`bag-page__attribute__description__attribute--text attribute${
-                              attr.selectedValue === item.value ? " active" : ""
-                            }`}
-                          >
-                            {item.value}
-                          </div>
-                        ))}
-                      {attr.type === "swatch" &&
-                        attr.items &&
-                        attr.items.map((item) => (
-                          <div
-                            key={item.id}
-                            style={{ backgroundColor: `${item.value}` }}
-                            className={`bag-page__attribute__description__attribute--swatch attribute${
-                              attr.selectedValue === item.value ? " active" : ""
-                            }`}
-                          ></div>
-                        ))}
-                    </div>
-                  </div>
-                ))} */}
               </div>
               <div className="item__gallery">
                 <div className="item__qty-btns">
