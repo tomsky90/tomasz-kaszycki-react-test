@@ -66,13 +66,13 @@ class CartPage extends Component {
           {this.totalItemsInCart() > 0 ? (
             <div className="cart-page__cart-summary">
               <div className="cart-page__cart-summary__item-wrapper">
-                <p className="cart-page__cart-summary__tax-price">Tax 21%: </p> <p className="cart-page__cart-summary__bold-font">{this.calculateTax()}</p>
+                <p className="cart-page__cart-summary__tax-price">Tax 21%: </p> <p className="cart-page__cart-summary__bold-font">{selectedCurrency.symbol} {this.calculateTax()}</p>
               </div>
               <div className="cart-page__cart-summary__item-wrapper">
                 <p className="cart-page__cart-summary__cart-qty">Quantity: </p> <p className="cart-page__cart-summary__bold-font">{this.totalItemsInCart()}</p>
               </div>
               <div className="cart-page__cart-summary__item-wrapper">
-                <p className="cart-page__cart-summary__total-price">Total: </p> <p className="cart-page__cart-summary__bold-font">{this.calculateTotalPrice()}</p>
+                <p className="cart-page__cart-summary__total-price">Total: </p> <p className="cart-page__cart-summary__bold-font">{selectedCurrency.symbol} {this.calculateTotalPrice()}</p>
               </div>
               <button>ORDER</button>
           </div>

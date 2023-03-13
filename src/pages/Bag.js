@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
 import { getTitle, getSubTitle, getPrice } from "../utility";
+//components
+import Attributes from "../components/attributes/Attributes";
 
 class BagPage extends PureComponent {
   constructor(props) {
@@ -34,7 +36,7 @@ class BagPage extends PureComponent {
 
   totalItemsInCart = () => {
     let total = null;
-    this.props.cart.cart.cartItems.forEach((element) => {
+    this.props.cartItems.forEach((element) => {
       total += element.qty;
     });
     return total;
@@ -43,7 +45,7 @@ class BagPage extends PureComponent {
   calculateTotalPrice = () => {
     let price = null;
     const tax = 21;
-    this.props.cart.cart.cartItems.forEach((item) => {
+    this.props.cartItems.forEach((item) => {
       price +=
         getPrice(item.prices, this.props.currencies.selectedCurrency.symbol) *
         item.qty;
@@ -82,15 +84,18 @@ class BagPage extends PureComponent {
                   {getPrice(item.prices, selectedCurrency?.symbol)}
                 </p>
                 {item.attributes.map((attr) => (
+                  <Attributes key={attr.element} attr={attr} className='bag-page'/>
+                ))}
+                {/* {item.attributes.map((attr) => (
                   <div key={attr.element} className="bag-page__attribute">
                     <p>{attr.element}</p>
-                    <div className="bag-page__attribute__description-wrapper__attributes-wrapper">
+                    <div className="bag-page__attribute__description__attributes-wrapper">
                       {attr.type === "text" &&
                         attr.items &&
                         attr.items.map((item) => (
                           <div
                             key={item.id}
-                            className={`bag-page__attribute__description-wrapper__attribute--text attribute${
+                            className={`bag-page__attribute__description__attribute--text attribute${
                               attr.selectedValue === item.value ? " active" : ""
                             }`}
                           >
@@ -103,14 +108,14 @@ class BagPage extends PureComponent {
                           <div
                             key={item.id}
                             style={{ backgroundColor: `${item.value}` }}
-                            className={`bag-page__attribute__description-wrapper__attribute--swatch attribute${
+                            className={`bag-page__attribute__description__attribute--swatch attribute${
                               attr.selectedValue === item.value ? " active" : ""
                             }`}
                           ></div>
                         ))}
                     </div>
                   </div>
-                ))}
+                ))} */}
               </div>
               <div className="item__gallery">
                 <div className="item__qty-btns">
@@ -168,7 +173,7 @@ class BagPage extends PureComponent {
 }
 
 export default connect(
-  (state) => ({ cart: state, currencies: state.currencies }),
+  (state) => ({ cart: state, currencies: state.currencies, cartItems: state.cart.cartItems }),
   {
     upCartItemByOne,
     minusCartItemByOne,
