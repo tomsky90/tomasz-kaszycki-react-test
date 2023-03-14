@@ -53,7 +53,7 @@ class CartPage extends Component {
     }
     return(
         <div className="cart-page">
-           <h1>CART</h1>
+            <h1>CART</h1>{console.log(this.props)}
            {cartItems.map((item, index) => ( 
             <CartItem
               key={`${item.id}${index}`} 

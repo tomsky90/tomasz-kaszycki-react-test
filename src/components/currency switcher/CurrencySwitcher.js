@@ -64,6 +64,7 @@ class CurrencySwitcher extends PureComponent {
                   cartBtnRef={this.props.cartBtnRef}
                   hideBagePage={this.props.closeBagPage}
                   isBagPageActive={isBagPageActive}
+                  toggleBagPageActive={toggleBagPageActive}
                 />
               )}
             </div>

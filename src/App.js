@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Routes, Route, useParams, Navigate} from 'react-router-dom';
+import { Routes, Route, useParams, Navigate} from 'react-router-dom';
 import store from "./store";
 import { Provider } from "react-redux";
 //components
@@ -27,7 +27,6 @@ class App extends Component {
     }
     return(
       <Provider store={store}>
-      <BrowserRouter>
       <div className='app-wrapper'>
         <Message/>
         <Header/>
@@ -35,10 +34,9 @@ class App extends Component {
           <Route path='/:name' element={<Wrapper/>}/>
           <Route path='/' element={<Navigate replace to='/all'/>}/>
           <Route path=':category/:id' element={<ProductPageWrapper/>}/>
-          <Route path='cart' element={<CartPage/>}/>
+          <Route path='/cart' element={<CartPage/>}/>
         </Routes>
       </div>
-      </BrowserRouter>
       </Provider>
     )
   }
