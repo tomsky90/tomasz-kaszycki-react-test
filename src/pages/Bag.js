@@ -34,11 +34,9 @@ class BagPage extends PureComponent {
   }
 
   totalItemsInCart = () => {
-    let total = null;
-    this.props.cartItems.forEach((element) => {
-      total += element.qty;
-    });
-    return total;
+    const sum = this.props.cartItems.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.qty,0);
+    return sum;
   };
 
   render() {

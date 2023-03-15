@@ -19,7 +19,8 @@ class CategoryPage extends Component {
   }
 
   render() {
-    if(!this.props.products) {
+    const { products } = this.props
+    if(!products) {
       return (
         <Spinner/>
       )
@@ -31,8 +32,8 @@ class CategoryPage extends Component {
         </div>
 
         <div className="category-page-wrapper__items-wrapper">
-          {this.props.products &&
-            this.props.products.map((item) => (
+          {products &&
+            products.map((item) => (
               <ProductDetailComponent item={item} key={item.id} />
             ))}
         </div>

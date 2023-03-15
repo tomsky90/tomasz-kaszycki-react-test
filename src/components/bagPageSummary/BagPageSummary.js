@@ -5,14 +5,15 @@ import { getPrice } from "../../utility";
 
 class BagPageSummary extends PureComponent {
   calculateTotalPrice = () => {
-    let price = null;
     const tax = 21;
-    this.props.cartItems.forEach((item) => {
-      price +=
-        getPrice(item.prices, this.props.selectedCurrency.symbol) * item.qty;
-    });
-    const taxValue = (tax / 100) * price;
-    const totalPrice = price + taxValue;
+    const sum = this.props.cartItems.reduce(
+      (accumulator, currentValue) =>
+        getPrice(currentValue.prices, this.props.selectedCurrency.symbol) *
+        currentValue.qty,
+      0
+    );
+    const taxValue = (tax / 100) * sum;
+    const totalPrice = sum + taxValue;
 
     return totalPrice.toFixed(2);
   };
