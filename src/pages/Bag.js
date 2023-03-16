@@ -4,6 +4,8 @@ import { upCartItemByOne, minusCartItemByOne } from "../actions/cartAction";
 //components
 import MiniCartItem from "../components/miniCartItem/MiniCartItem";
 import BagPageSummary from "../components/bagPageSummary/BagPageSummary";
+//helpers
+import { totalItemsInCart } from "../utility";
 
 class BagPage extends PureComponent {
   constructor(props) {
@@ -33,12 +35,6 @@ class BagPage extends PureComponent {
     }
   }
 
-  totalItemsInCart = () => {
-    const sum = this.props.cartItems.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.qty,0);
-    return sum;
-  };
-
   render() {
     const { cartItems } = this.props.cart.cart;
     const { selectedCurrency } = this.props.currencies;
@@ -49,10 +45,10 @@ class BagPage extends PureComponent {
           <p className="bag-page__heading">
             My Bag.
             <span>
-              {this.totalItemsInCart()}
-              {this.totalItemsInCart() < 1
+              {totalItemsInCart(cartItems)}
+              {totalItemsInCart(cartItems) < 1
                 ? "No items in the cart"
-                : this.totalItemsInCart() === 1
+                : totalItemsInCart(cartItems) === 1
                 ? " item"
                 : " items"}
             </span>

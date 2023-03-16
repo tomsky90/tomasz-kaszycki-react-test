@@ -15,7 +15,7 @@ class CartItem extends PureComponent {
       item,
       index,
       cartItems,
-      selectedCurrency,
+      symbol,
       upCartItemByOne,
       minusCartItemByOne,
     } = this.props;
@@ -30,8 +30,8 @@ class CartItem extends PureComponent {
               {getSubTitle(item.name)}
             </p>
             <p className="cart-page__cart-item__description__price">
-              <span>{selectedCurrency.symbol}</span>{" "}
-              {getPrice(item.prices, selectedCurrency.symbol)}
+              <span>{symbol}</span>{" "}
+              {getPrice(item.prices, symbol)}
             </p>
             {item.attributes.map((attr) => (
               <Attributes key={attr.element} attr={attr} className='cart-page'/>

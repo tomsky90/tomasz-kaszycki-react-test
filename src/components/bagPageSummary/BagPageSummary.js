@@ -1,22 +1,9 @@
 import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 //helpers
-import { getPrice } from "../../utility";
+import { calculateTotalPrice } from "../../utility";
 
 class BagPageSummary extends PureComponent {
-  calculateTotalPrice = () => {
-    const tax = 21;
-    const sum = this.props.cartItems.reduce(
-      (accumulator, currentValue) =>
-        getPrice(currentValue.prices, this.props.selectedCurrency.symbol) *
-        currentValue.qty,
-      0
-    );
-    const taxValue = (tax / 100) * sum;
-    const totalPrice = sum + taxValue;
-
-    return totalPrice.toFixed(2);
-  };
 
   render() {
     const { selectedCurrency } = this.props;
@@ -25,7 +12,7 @@ class BagPageSummary extends PureComponent {
         <div className="bag-page__bag-wrapper__summary__price">
           <p>Total</p>
           <p>
-            <span>{selectedCurrency.symbol}</span> {this.calculateTotalPrice()}
+            <span>{selectedCurrency.symbol}</span> {calculateTotalPrice(this.props.cartItems, this.props.selectedCurrency.symbol)}
           </p>
         </div>
         <div className="bag-page__bag-wrapper__summary__btns ">
