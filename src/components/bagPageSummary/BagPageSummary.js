@@ -6,13 +6,14 @@ import { calculateTotalPrice } from "../../utility";
 class BagPageSummary extends PureComponent {
 
   render() {
-    const { selectedCurrency } = this.props;
+    const { symbol } = this.props.selectedCurrency;
+    const { cartItems } = this.props;
     return (
       <div className="bag-page__bag-wrapper__summary">
         <div className="bag-page__bag-wrapper__summary__price">
           <p>Total</p>
           <p>
-            <span>{selectedCurrency.symbol}</span> {calculateTotalPrice(this.props.cartItems, this.props.selectedCurrency.symbol)}
+            <span>{symbol}</span> {calculateTotalPrice(cartItems, symbol)}
           </p>
         </div>
         <div className="bag-page__bag-wrapper__summary__btns ">

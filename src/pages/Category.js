@@ -5,16 +5,18 @@ import { connect } from "react-redux";
 //components
 import ProductDetailComponent from "../components/productDetail/ProductDetailComponent";
 import Spinner from "../components/spinner/Spinner";
+//hoc
+import withParams from "../HOC/WithParams";
 
 class CategoryPage extends Component {
 
   componentDidMount() {
-    this.props.fetchProducts(this.props.match.params.name);
+    this.props.fetchProducts(this.props.params.name);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.name !== this.props.match.params.name) {
-      this.props.fetchProducts(this.props.match.params.name);
+    if (prevProps.params.name !== this.props.params.name) {
+      this.props.fetchProducts(this.props.params.name);
     }
   }
 
@@ -28,7 +30,7 @@ class CategoryPage extends Component {
     return (
       <section className="category-page-wrapper">
         <div className="category-page-wrapper__title-wrapper">
-          <h1>{this.props.match.params.name.toUpperCase()}</h1>
+          <h1>{this.props.params.name.toUpperCase()}</h1>
         </div>
 
         <div className="category-page-wrapper__items-wrapper">
@@ -47,4 +49,4 @@ export default connect(
   {
     fetchProducts,
   }
-)(CategoryPage);
+)(withParams(CategoryPage));

@@ -6,7 +6,9 @@ class Attributes extends PureComponent {
     return (
       <div key={attr.element} className={`${className}__attribute`}>
         <p>{attr.element}:</p>
-        <div className={`${className}__attribute__description__attributes-wrapper`}>
+        <div
+          className={`${className}__attribute__description__attributes-wrapper`}
+        >
           {attr.type === "text" &&
             attr.items &&
             attr.items.map((item) => (

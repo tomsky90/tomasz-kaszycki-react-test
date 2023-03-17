@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route, useParams, Navigate} from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import store from "./store";
 import { Provider } from "react-redux";
 //components
@@ -16,24 +16,16 @@ import './styles/appStyles.scss';
 class App extends Component {
 
   render(){
-    const Wrapper = (props) => {
-      const params = useParams();
-      return <CategoryPage {...{...props, match: {params}}}/>
-    }
 
-    const ProductPageWrapper = (props) => {
-      const params = useParams();
-      return <ProductPage {...{...props, match: {params}}}/>
-    }
     return(
       <Provider store={store}>
       <div className='app-wrapper'>
         <Message/>
         <Header/>
         <Routes>
-          <Route path='/:name' element={<Wrapper/>}/>
+          <Route path='/:name' element={<CategoryPage/>}/>
           <Route path='/' element={<Navigate replace to='/all'/>}/>
-          <Route path=':category/:id' element={<ProductPageWrapper/>}/>
+          <Route path=':category/:id' element={<ProductPage/>}/>
           <Route path='/cart' element={<CartPage/>}/>
         </Routes>
       </div>

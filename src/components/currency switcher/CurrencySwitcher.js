@@ -4,16 +4,10 @@ import cartIcon from "../../icons/Empty Cart.png";
 import currencyArrow from "../../icons/Vector.png";
 //components
 import BagPage from "../../pages/Bag";
+//helpers
+import { totalItemsInCart } from "../../utility";
 
 class CurrencySwitcher extends PureComponent {
-  totalItemsInCart = () => {
-    let total = null;
-    this.props.cart.cartItems.forEach((element) => {
-      total += element.qty;
-    });
-    return total;
-  };
-
   render() {
     const {
       currencySwitcherRef,
@@ -34,7 +28,9 @@ class CurrencySwitcher extends PureComponent {
             <div
               className="currency-switcher__icon"
               ref={currencySwitcherRef}
-              onClick={() => {toggleOptionsActive()}}
+              onClick={() => {
+                toggleOptionsActive();
+              }}
             >
               <span>{symbol}</span>
               <img
@@ -49,12 +45,14 @@ class CurrencySwitcher extends PureComponent {
             </div>
             <div className="header__cart-icon-container">
               <div
-                onClick={() => {toggleBagPageActive()}}
+                onClick={() => {
+                  toggleBagPageActive();
+                }}
                 ref={cartBtnRef}
               >
                 {cartItems.length > 0 && (
                   <div className="header__cart-icon-container__items-in-cart">
-                    {this.totalItemsInCart()}
+                    {totalItemsInCart(cartItems)}
                   </div>
                 )}
                 <img src={cartIcon} alt="cart icon" />
@@ -79,12 +77,12 @@ class CurrencySwitcher extends PureComponent {
             {currencies !== undefined
               ? currencies.map((currency) => (
                   <div
+                    className="option"
                     onClick={() => {
                       setSelectedCurrency(currency);
                       toggleOptionsActive();
                     }}
                     key={currency.label}
-                    className="option"
                   >
                     <span>{currency.symbol}</span>
                     <span>{currency.label}</span>

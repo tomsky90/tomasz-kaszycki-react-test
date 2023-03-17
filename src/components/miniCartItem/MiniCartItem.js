@@ -6,15 +6,22 @@ import { getTitle, getSubTitle, getPrice } from "../../utility";
 
 class MiniCartItem extends PureComponent {
   render() {
-    const { item, index, selectedCurrency } = this.props;
+    const {
+      item,
+      index,
+      selectedCurrency,
+      cartItems,
+      minusCartItemByOne,
+      upCartItemByOne,
+    } = this.props;
     return (
       <div className="cart-item">
         <div className="cart-item__description">
           <p>{getTitle(item.name)}</p>
           <p>{getSubTitle(item.name)}</p>
           <p className="cart-item price">
-            <span>{selectedCurrency?.symbol}</span>{" "}
-            {getPrice(item.prices, selectedCurrency?.symbol)}
+            <span>{selectedCurrency.symbol}</span>{" "}
+            {getPrice(item.prices, selectedCurrency.symbol)}
           </p>
           {item.attributes.map((attr) => (
             <Attributes key={attr.element} attr={attr} className="bag-page" />
@@ -25,18 +32,16 @@ class MiniCartItem extends PureComponent {
             <button
               className="item__qty-btns__add"
               onClick={() => {
-                this.props.upCartItemByOne(item);
+                upCartItemByOne(item);
               }}
             >
               +
             </button>
-            {!this.props.cartItems[index].qty
-              ? 0
-              : this.props.cartItems[index].qty}
+            {!cartItems[index].qty ? 0 : cartItems[index].qty}
             <button
               className="item__qty-btns__take-away"
               onClick={() => {
-                this.props.minusCartItemByOne(item);
+                minusCartItemByOne(item);
               }}
             >
               -

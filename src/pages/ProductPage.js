@@ -7,6 +7,8 @@ import { showMessage, hideMessage } from "../actions/messageAction";
 import Gallery from "../components/gallery/Gallery";
 import Spinner from "../components/spinner/Spinner";
 import ProductPageItem from "../components/productPageItem/ProductPageItem";
+//HOC
+import withParams from "../HOC/WithParams";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class ProductPage extends Component {
 
   //fetch item data
   componentDidMount() {
-    this.props.fetchProduct(this.props.match.params.id);
+    this.props.fetchProduct(this.props.params.id);
     this.setDefaultAttribute();
   }
 
@@ -131,4 +133,4 @@ export default connect(
     showMessage,
     hideMessage,
   }
-)(ProductPage);
+)(withParams(ProductPage));
