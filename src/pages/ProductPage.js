@@ -58,11 +58,19 @@ class ProductPage extends Component {
     });
   };
 
+  pushToCart(item) {
+    this.props.addToCart(item);
+        this.props.showMessage(`${item.name} added to cart!`);
+        setTimeout(() => {
+          this.props.hideMessage();
+        }, 3000);
+  }
+
   validateProduct = (item) => {
     const itemCopy = { ...item };
     //if product has no attributes add it to cart
     if (itemCopy.attributes.length === 0) {
-      this.props.addToCart(itemCopy);
+      this.pushToCart(itemCopy)
     } else {
       //check if all attriubutes are selected
       let isSelected = true;
@@ -91,11 +99,7 @@ class ProductPage extends Component {
           refacoredAttributes.push(element);
         });
         itemCopy.attributes = refacoredAttributes;
-        this.props.addToCart(itemCopy);
-        this.props.showMessage(`${itemCopy.name} added to cart!`);
-        setTimeout(() => {
-          this.props.hideMessage();
-        }, 3000);
+        this.pushToCart(itemCopy)
       }
     }
   };
