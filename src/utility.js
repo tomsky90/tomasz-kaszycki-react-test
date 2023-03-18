@@ -24,13 +24,18 @@ export const  totalItemsInCart = (items) => {
     return sum;
   };
 
+export const calculatePrice = (items, symbol) => {
+  const sum = items.reduce(
+    (accumulator, currentValue) =>
+      accumulator += getPrice(currentValue.prices, symbol) *
+      currentValue.qty,0
+  );
+  return sum
+}
+
 export const calculateTotalPrice = (items, symbol) => {
     const tax = 21;
-    const sum = items.reduce(
-      (accumulator, currentValue) =>
-        accumulator += getPrice(currentValue.prices, symbol) *
-        currentValue.qty,0
-    );
+    const sum = calculatePrice(items, symbol)
     const taxValue = (tax / 100) * sum;
     const totalPrice = sum + taxValue;
 

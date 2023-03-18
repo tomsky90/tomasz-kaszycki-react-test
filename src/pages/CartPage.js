@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //redux
 import { connect } from "react-redux";
 //helpers
-import { totalItemsInCart, calculateTotalPrice } from "../utility";
+import { totalItemsInCart, calculatePrice, calculateTotalPrice } from "../utility";
 //components
 import CartItem from "../components/Cart Item/CartItem";
 import Spinner from "../components/spinner/Spinner";
@@ -10,7 +10,7 @@ import Spinner from "../components/spinner/Spinner";
 class CartPage extends Component {
   calculateTax = () => {
     const tax = 21;
-    const price = calculateTotalPrice(this.props.cartItems, this.props.symbol);
+    const price = calculatePrice(this.props.cartItems, this.props.symbol);
     const taxValue = (tax / 100) * price;
     return taxValue.toFixed(2);
   };
